@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "SalesFlow LinkedIn Assistant",
+  "version": "2.0.0",
+  "description": "AI-personalized LinkedIn outreach, powered by SalesFlow — drafts, sends, tracks, and automates connection requests and messages.",
+  "permissions": ["activeTab", "storage", "tabs", "scripting", "alarms", "notifications"],
+  "host_permissions": [
+    "https://www.linkedin.com/*",
+    "https://linkedin-automation-engine-v1-0.onrender.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": [
+        "logger.js",
+        "utils.js",
+        "selectors.js",
+        "linkedin.js",
+        "detector.js",
+        "sender.js",
+        "parser.js",
+        "executor.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.linkedin.com/in/*"],
+      "js": ["sidebar.js"],
+      "css": ["sidebar.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "SalesFlow LinkedIn Assistant",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
